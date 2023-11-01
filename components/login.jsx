@@ -2,14 +2,21 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 
+
 const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     textAlignVertical: "center",
   },
+  container: {
+    marginTop: 8,
+  },
+  input: {
+    marginBottom: 10,
+  }
 });
 
-export function Login() {
+export function Login({navigation}) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   //Guardar el estado del icono del ojo para mostrarlo o no.
@@ -20,18 +27,20 @@ export function Login() {
 
   const getToken = async () => {
     try {
+      
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({username: email, password: password}),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: email, password: password }),
       });
-    
-      if(response.status === 200){
+
+      if (response.status === 200) {
         const data = await response.json();
         setToken(data.token);
-        console.log(token);
-      }
-      else{
+        navigation.navigate('Token', {
+          txtToken: data.token
+        })
+      } else {
         console.error("Credenciales no válidas");
       }
     } catch (error) {
@@ -40,14 +49,15 @@ export function Login() {
   };
 
   return (
-    <View>
-      <Text style={styles.text}>Login to your account</Text>
+    <View style={styles.container}>
       <TextInput
+        style={styles.input}
         label="Email"
         value={email}
         onChangeText={(email) => setEmail(email)}
       />
       <TextInput
+        style={styles.input}
         label="Password"
         id="passTxt"
         value={password}
@@ -64,22 +74,19 @@ export function Login() {
           />
         }
         //La visibilidad el texto se modifica
+
         secureTextEntry={!showPassword}
       />
-      <Button
-        icon="send"
-        mode="contained"
-        onPress={() => getToken()}
-      >
+      <Button icon="send" mode="contained" onPress={() => getToken()}>
         Login
       </Button>
-      
-      {token &&(
+
+      {/* {token && (
         <View>
-            <Text>El token de acceso es: </Text>
-            <Text>{token}</Text>
+          <Text>El token de acceso es: </Text>
+          <Text>{token}</Text>
         </View>
-      )}
+      )} */}
     </View>
   );
 }
