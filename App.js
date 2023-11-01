@@ -1,11 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Login } from './components/Login';
+import { Token } from './components/Token';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator();
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {/* <Login/>
+      <StatusBar style="auto" /> */}
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name='Login' component={Login}/>
+          <Stack.Screen name='Token' component={Token}/>
+
+          {/* Rutas de la comida por nombre, categoria e ingrediente */}
+          {/* IMPORTANTE cambiar el nombre del componente*/}
+          {/* Sí cambiaste el nombre de la ruta asegurate de ir al componente "Token" y hacer el respectivo cambio para que el boton pueda encontrar dicha ruta */}
+          <Stack.Screen name='mealByName' component={Token}/>
+          <Stack.Screen name='mealByIngredient' component={Token}/>
+          <Stack.Screen name='mealByCategory' component={Token}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
@@ -14,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    margin: 10,
   },
 });
