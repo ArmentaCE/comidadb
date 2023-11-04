@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Login } from './components/Login';
 import { Token } from './components/Token';
+import { Category } from './components/Category'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -22,7 +23,7 @@ export default function App() {
           {/* Sí cambiaste el nombre de la ruta asegurate de ir al componente "Token" y hacer el respectivo cambio para que el boton pueda encontrar dicha ruta */}
           <Stack.Screen name='mealByName' component={Token}/>
           <Stack.Screen name='mealByIngredient' component={Token}/>
-          <Stack.Screen name='mealByCategory' component={Token}/>
+          <Stack.Screen name='mealByCategory' component={Category} options={{title: "Busqueda por categoria"}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </View>
