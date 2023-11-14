@@ -5,7 +5,7 @@ import { Token } from './components/Token';
 import { Category } from './components/Category'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Name } from './components/Name';
+import { Ingredient } from './components/Ingedient';
 
 export default function App() {
 
@@ -22,8 +22,8 @@ export default function App() {
           {/* Rutas de la comida por nombre, categoria e ingrediente */}
           {/* IMPORTANTE cambiar el nombre del componente*/}
           {/* Sí cambiaste el nombre de la ruta asegurate de ir al componente "Token" y hacer el respectivo cambio para que el boton pueda encontrar dicha ruta */}
-          <Stack.Screen name='mealByName' component={Name}/>
-          <Stack.Screen name='mealByIngredient' component={Token}/>
+          <Stack.Screen name='mealByName' component={Token}/>
+          <Stack.Screen name='mealByIngredient' component={Ingredient}/>
           <Stack.Screen name='mealByCategory' component={Category} options={{title: "Busqueda por categoria"}}/>
         </Stack.Navigator>
       </NavigationContainer>
